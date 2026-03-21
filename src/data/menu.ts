@@ -1,4 +1,25 @@
-export const menuData = {
+export type MenuItem = {
+  name: string;
+  price: number;
+  veg: boolean;
+  qty?: string;
+  badge?: string;
+};
+
+export type MenuSubcategory = {
+  id: string;
+  label: string;
+  color: string;
+  items: MenuItem[];
+};
+
+export type MenuCategory = {
+  label: string;
+  emoji: string;
+  subcategories: MenuSubcategory[];
+};
+
+export const menuData: Record<string, MenuCategory> = {
   momos: {
     label: "Momos",
     emoji: "🥟",

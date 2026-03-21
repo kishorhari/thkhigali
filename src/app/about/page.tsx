@@ -152,8 +152,6 @@ export default function AboutPage() {
                     borderTop: `3px solid ${v.color}`,
                     transition: "all 0.3s",
                   }}
-                  onMouseEnter={(e) => { e.currentTarget.style.transform = "translateY(-6px)"; e.currentTarget.style.background = "rgba(255,255,255,0.07)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.background = "rgba(255,255,255,0.04)"; }}
                 >
                   <span style={{ fontSize: "2.5rem", display: "block", marginBottom: "14px" }}>{v.icon}</span>
                   <h4 style={{ fontWeight: 800, fontSize: "1rem", color: "#fff", marginBottom: "8px" }}>{v.title}</h4>

@@ -1,7 +1,6 @@
 "use client";
 import { useState } from "react";
-import { menuData } from "@/data/menu";
-import type { Metadata } from "next";
+import { menuData, type MenuItem } from "@/data/menu";
 
 const categories = [
   { id: "momos", label: "🥟 Momos" },
@@ -10,16 +9,18 @@ const categories = [
   { id: "noodles", label: "🍝 Noodles & Rice" },
   { id: "snacks", label: "🍔 Snacks & More" },
   { id: "beverages", label: "🧋 Beverages" },
-];
+] as const;
+
+type CategoryId = (typeof categories)[number]["id"];
 
 type FilterType = "all" | "veg" | "nonveg";
 
 export default function MenuPage() {
-  const [activeCategory, setActiveCategory] = useState("momos");
+  const [activeCategory, setActiveCategory] = useState<CategoryId>("momos");
   const [filter, setFilter] = useState<FilterType>("all");
   const [search, setSearch] = useState("");
 
-  const catData = menuData[activeCategory as keyof typeof menuData];
+  const catData = menuData[activeCategory];
 
   return (
     <>
@@ -168,7 +169,7 @@ export default function MenuPage() {
       <div style={{ background: "#0D0402", minHeight: "60vh", padding: "48px 5% 80px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           {catData.subcategories.map((sub) => {
-            const items = sub.items.filter((item) => {
+            const items = sub.items.filter((item: MenuItem) => {
               const matchFilter = filter === "all" || (filter === "veg" && item.veg) || (filter === "nonveg" && !item.veg);
               const matchSearch = !search || item.name.toLowerCase().includes(search.toLowerCase());
               return matchFilter && matchSearch;
