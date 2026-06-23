@@ -1,4 +1,5 @@
 "use client";
+import Reveal from "@/components/ui/Reveal";
 
 export default function ContactSection() {
   return (
@@ -10,7 +11,7 @@ export default function ContactSection() {
       }}
     >
       <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "4rem" }}>
+        <Reveal style={{ textAlign: "center", marginBottom: "4rem" }}>
           <div style={{ color: "#C0392B", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "4px", textTransform: "uppercase", marginBottom: "0.5rem" }}>
             Find Us
           </div>
@@ -28,7 +29,7 @@ export default function ContactSection() {
               Touch
             </span>
           </h2>
-        </div>
+        </Reveal>
 
         <div
           style={{

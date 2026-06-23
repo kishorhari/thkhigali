@@ -7,9 +7,9 @@ import { Menu, X } from "lucide-react";
 
 const navLinks = [
   { label: "Home", href: "/" },
+  { label: "Franchise", href: "/#franchise" },
   { label: "About", href: "/about" },
   { label: "Menu", href: "/menu" },
-  { label: "Franchise", href: "/#franchise" },
   { label: "Contact", href: "/#contact" },
 ];
 
@@ -88,7 +88,7 @@ export default function Navbar() {
           ))}
           <li>
             <Link
-              href="/#franchise"
+              href="/#apply"
               style={{
                 background: "linear-gradient(135deg,#C0392B,#E67E22)",
                 color: "#fff",
@@ -110,7 +110,7 @@ export default function Navbar() {
                 (e.target as HTMLElement).style.boxShadow = "0 4px 20px rgba(192,57,43,0.4)";
               }}
             >
-              Get Franchise 🌶️
+              Apply Now 🌶️
             </Link>
           </li>
         </ul>
@@ -161,7 +161,7 @@ export default function Navbar() {
         ))}
         <div style={{ padding: "16px 5% 8px" }}>
           <Link
-            href="/#franchise"
+            href="/#apply"
             onClick={() => setMobileOpen(false)}
             style={{
               display: "block",

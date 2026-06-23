@@ -98,22 +98,22 @@ export default function HeroSection() {
               }}
             >
               <span style={{ fontSize: "0.8rem", fontWeight: 800, color: "#F5C518", letterSpacing: "2px", textTransform: "uppercase" }}>
-                🌶️ Noida&apos;s Hottest Street Food
+                🌶️ Franchise Opportunity — ₹8 Lacs Onwards
               </span>
             </div>
 
             <h1
               style={{
                 fontFamily: "'Playfair Display', serif",
-                fontSize: "clamp(3.2rem, 6vw, 5.5rem)",
+                fontSize: "clamp(2.8rem, 5.5vw, 5rem)",
                 fontWeight: 900,
-                lineHeight: 1.0,
+                lineHeight: 1.05,
                 color: "#fff",
                 marginBottom: "1.2rem",
                 animation: "fadeInUp 0.6s ease both",
               }}
             >
-              Street Style
+              India&apos;s Fastest Growing
               <span
                 style={{
                   display: "block",
@@ -123,9 +123,9 @@ export default function HeroSection() {
                   backgroundClip: "text",
                 }}
               >
-                Chinese,
+                Indo-Chinese
               </span>
-              <span style={{ color: "#E74C3C" }}>Desi Spice.</span>
+              <span style={{ color: "#E74C3C" }}>QSR Chain.</span>
             </h1>
 
             <p
@@ -138,7 +138,7 @@ export default function HeroSection() {
                 animation: "fadeInUp 0.7s ease both",
               }}
             >
-              From sizzling Momos to fiery Noodles — every bite at Tikhi Gali is crafted with bold Indo-Chinese flavours and zero compromise.
+              A centralised supply chain and a proven chef-less model that guarantee fresh, consistent, high-margin food at every Tikhi Gali outlet. Own a franchise and grow with us.
             </p>
 
             {/* USP tags */}
@@ -172,7 +172,7 @@ export default function HeroSection() {
             {/* CTAs */}
             <div style={{ display: "flex", gap: "16px", flexWrap: "wrap", animation: "fadeInUp 0.9s ease both" }}>
               <Link
-                href="/menu"
+                href="/#franchise"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -197,10 +197,10 @@ export default function HeroSection() {
                   (e.currentTarget as HTMLElement).style.boxShadow = "0 8px 30px rgba(192,57,43,0.5)";
                 }}
               >
-                Explore Menu 🍜
+                Apply for Franchise →
               </Link>
               <Link
-                href="/#franchise"
+                href="/menu"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -224,7 +224,7 @@ export default function HeroSection() {
                   (e.currentTarget as HTMLElement).style.color = "#E8A020";
                 }}
               >
-                Own a Franchise
+                Explore Menu 🍜
               </Link>
             </div>
 

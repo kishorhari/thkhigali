@@ -176,7 +176,7 @@ export default function Footer() {
           }}
         >
           <span style={{ color: "#3a2010", fontSize: "0.82rem" }}>
-            © 2025 Tikhi Gali. All rights reserved. | Street Style Chinese, Desi Spice.
+            © 2026 Tikhi Gali. All rights reserved. | Street Style Chinese, Desi Spice.
           </span>
           <div style={{ display: "flex", gap: "16px" }}>
             {["Privacy Policy", "Terms of Service"].map((t) => (
