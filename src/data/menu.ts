@@ -19,6 +19,49 @@ export type MenuCategory = {
   subcategories: MenuSubcategory[];
 };
 
+// Maps each menu subcategory to a representative dish photo.
+// Swap any path for your own product shots when available.
+const SUB_IMAGE: Record<string, string> = {
+  // Momos
+  steamed: "/food/momos-steamer.jpg",
+  "desi-tadka": "/food/momos-assorted.jpg",
+  "pan-fried": "/food/momos-plate.jpg",
+  "hot-crispy": "/food/momos-assorted.jpg",
+  gravy: "/food/momos-plate.jpg",
+  fried: "/food/momos-assorted.jpg",
+  assorted: "/food/momos-plate.jpg",
+  // Starters
+  "veg-starters": "/food/menu/paneer.jpg",
+  "nonveg-starters": "/food/menu/chicken-starter.jpg",
+  soups: "/food/noodle-soup.jpg",
+  // Mains
+  gravies: "/food/menu/gravy.jpg",
+  bowls: "/food/menu/bowl.jpg",
+  // Noodles & Rice
+  "veg-noodles": "/food/noodles-fried.jpg",
+  "chicken-noodles": "/food/chilli-noodles.jpg",
+  rice: "/food/menu/rice.jpg",
+  // Snacks
+  sandwiches: "/food/menu/sandwich.jpg",
+  burgers: "/food/burger.jpg",
+  maggi: "/food/menu/maggi.jpg",
+  // Beverages
+  mojitos: "/food/menu/mojito.jpg",
+  shakes: "/food/menu/shake.jpg",
+  desserts: "/food/menu/dessert.jpg",
+};
+
+/** Returns a dish photo for a menu item, with keyword overrides for a few cross-category dishes. */
+export function itemImage(name: string, subId: string): string {
+  const n = name.toLowerCase();
+  if (n.includes("manchurian")) return "/food/menu/gravy.jpg";
+  if (n.includes("maggi")) return "/food/menu/maggi.jpg";
+  if (n.includes("sandwich")) return "/food/menu/sandwich.jpg";
+  if (n.includes("burger")) return "/food/burger.jpg";
+  if (n.includes("fried rice") || n.endsWith("rice")) return "/food/menu/rice.jpg";
+  return SUB_IMAGE[subId] ?? "/food/momos-steamer.jpg";
+}
+
 export const menuData: Record<string, MenuCategory> = {
   momos: {
     label: "Momos",
@@ -27,7 +70,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "steamed",
         label: "Steamed Momos",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Veggie Momos", price: 89, qty: "6 pcs", veg: true },
           { name: "Paneer Momos", price: 109, qty: "6 pcs", veg: true },
@@ -42,7 +85,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "desi-tadka",
         label: "Desi Tadka Momos",
-        color: "#E67E22",
+        color: "#e7293c",
         items: [
           { name: "Veggie Tandoori Momos", price: 159, qty: "6 pcs", veg: true },
           { name: "Veg Achari Momos", price: 159, qty: "6 pcs", veg: true },
@@ -58,7 +101,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "pan-fried",
         label: "Pan Fried Momos",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Veg Pan Fried Momos", price: 109, qty: "6 pcs", veg: true },
           { name: "Paneer Pan Fried Momos", price: 139, qty: "6 pcs", veg: true },
@@ -68,7 +111,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "hot-crispy",
         label: "Hot & Crispy Momos",
-        color: "#E74C3C",
+        color: "#e7293c",
         items: [
           { name: "Veg Crispy Momos", price: 159, qty: "6 pcs", veg: true },
           { name: "Paneer Crispy Momos", price: 189, qty: "6 pcs", veg: true },
@@ -82,7 +125,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "gravy",
         label: "Indian Gravy Momos",
-        color: "#8B1A0E",
+        color: "#c0182b",
         items: [
           { name: "Veg Schezwan Momos", price: 139, qty: "6 pcs", veg: true },
           { name: "Veg Pepper Momos", price: 139, qty: "6 pcs", veg: true },
@@ -101,7 +144,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "fried",
         label: "Fried Momos",
-        color: "#E8A020",
+        color: "#e7293c",
         items: [
           { name: "Veg Fried Momos", price: 109, qty: "6 pcs", veg: true },
           { name: "Paneer Fried Momos", price: 129, qty: "6 pcs", veg: true },
@@ -153,7 +196,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "nonveg-starters",
         label: "Non-Veg Starters",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Chicken Manchurian", price: 189, veg: false },
           { name: "Salt & Pepper Chicken", price: 249, veg: false },
@@ -167,7 +210,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "soups",
         label: "Soups",
-        color: "#E67E22",
+        color: "#e7293c",
         items: [
           { name: "Hot & Sour Soup", price: 89, veg: true },
           { name: "Sweetcorn Soup", price: 99, veg: true },
@@ -184,7 +227,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "gravies",
         label: "Main Course Gravies",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Schezwan Paneer Gravy", price: 219, veg: true },
           { name: "Hot Garlic Paneer Gravy", price: 219, veg: true },
@@ -197,7 +240,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "bowls",
         label: "Hot Chinese Bowls",
-        color: "#8B1A0E",
+        color: "#c0182b",
         items: [
           { name: "Hakka Noodles + Hot Garlic Paneer Bowl", price: 189, veg: true },
           { name: "Hakka Noodles + Veg Manchurian Bowl", price: 199, veg: true },
@@ -232,7 +275,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "chicken-noodles",
         label: "Chicken Noodles",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Classic Chicken Hakka Noodles", price: 149, veg: false },
           { name: "Schezwan Chicken Noodles", price: 199, veg: false },
@@ -244,7 +287,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "rice",
         label: "Rice",
-        color: "#E67E22",
+        color: "#e7293c",
         items: [
           { name: "Classic Fried Rice", price: 109, veg: true },
           { name: "Schezwan Fried Rice", price: 139, veg: true },
@@ -266,7 +309,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "sandwiches",
         label: "Sandwiches",
-        color: "#E8A020",
+        color: "#e7293c",
         items: [
           { name: "Masala Sandwich", price: 59, veg: true },
           { name: "Veg Grilled Sandwich", price: 69, veg: true },
@@ -280,7 +323,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "burgers",
         label: "Burgers",
-        color: "#C0392B",
+        color: "#e7293c",
         items: [
           { name: "Veg Classic Burger", price: 89, veg: true },
           { name: "Veg Cheese Burger", price: 109, veg: true },
@@ -295,7 +338,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "maggi",
         label: "Maggi",
-        color: "#E8A020",
+        color: "#e7293c",
         items: [
           { name: "Plain Maggi", price: 49, veg: true },
           { name: "Vegetable Maggi", price: 69, veg: true },
@@ -324,7 +367,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "shakes",
         label: "Shakes",
-        color: "#8B1A0E",
+        color: "#c0182b",
         items: [
           { name: "Vanilla Shake", price: 99, veg: true },
           { name: "Butter Scotch Shake", price: 109, veg: true },
@@ -339,7 +382,7 @@ export const menuData: Record<string, MenuCategory> = {
       {
         id: "desserts",
         label: "Desserts",
-        color: "#E8A020",
+        color: "#e7293c",
         items: [
           { name: "Chocolate Brownie", price: 59, veg: true },
           { name: "Choco Lava Cake", price: 69, veg: true },
@@ -364,7 +407,7 @@ export const franchiseFormats = [
     investment: "₹8 Lacs*",
     area: "120–200 sq. ft.",
     format: "Delivery & Takeaway",
-    color: "#C0392B",
+    color: "#e7293c",
     features: ["Low setup cost", "2–3 staff only", "Fast ROI", "Delivery-first model"],
   },
   {
@@ -372,7 +415,7 @@ export const franchiseFormats = [
     investment: "₹10 Lacs*",
     area: "200–300 sq. ft.",
     format: "Delivery, Takeaway & Dine-In",
-    color: "#E8A020",
+    color: "#e7293c",
     features: ["Full dine-in experience", "Higher revenue potential", "Premium branding", "Complete kitchen setup"],
     popular: true,
   },

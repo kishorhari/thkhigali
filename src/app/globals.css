@@ -2,23 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Baloo+2:wght@400;600;700;800&family=Kalam:wght@700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Mea+Culpa&display=swap");
 
 :root {
-  --font-display: "Playfair Display", serif;
-  --font-body: "Baloo 2", sans-serif;
-  --font-accent: "Kalam", cursive;
-  --red: #c0392b;
-  --red2: #e74c3c;
-  --redDeep: #8b1a0e;
-  --yellow: #f5c518;
-  --gold: #e8a020;
-  --orange: #e67e22;
-  --dark: #0d0402;
-  --darkMid: #1a0804;
-  --darkCard: #1e0a04;
-  --cream: #fdf6ec;
-  --green: #27ae60;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-script: "Mea Culpa", cursive;
+
+  /* Momo Street palette (light) */
+  --bg: #ffffff;
+  --bg-soft: #f5f5f5;
+  --ink: #05080c;
+  --dark: #05080c;
+  --red: #e7293c;
+  --red-deep: #c0182b;
+  --red-soft: #612b2b;
+  --white: #ffffff;
+  --grey-1: #484848;
+  --grey-2: #5b5b5b;
+  --grey-3: #8a8a8e;
+  --grey-4: #aaa9ad;
+  --line: rgba(5, 8, 12, 0.1);
 }
 
 * {
@@ -33,118 +36,111 @@ html {
 
 body {
   font-family: var(--font-body);
-  background-color: var(--dark);
-  color: #fff;
+  background-color: var(--bg);
+  color: var(--ink);
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Custom scrollbar */
+/* Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--dark);
+  background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--gold);
-  border-radius: 3px;
+  background: var(--red);
+  border-radius: 4px;
 }
 
-/* Selection */
 ::selection {
   background: var(--red);
   color: #fff;
 }
 
-/* Noise texture overlay */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.015;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px;
-}
-
 @layer components {
-  .btn-primary {
-    @apply inline-flex items-center gap-2 bg-gradient-to-r from-brand-red to-brand-orange 
-           text-white font-bold rounded-full px-8 py-4 text-base
-           hover:shadow-[0_0_40px_rgba(192,57,43,0.6)] hover:-translate-y-1
-           transition-all duration-300 font-body;
+  /* Red pill CTA — the primary Momo Street button */
+  .btn-red {
+    @apply inline-flex items-center justify-center gap-2 bg-[#e7293c] text-white font-semibold
+           rounded-full px-7 py-3.5 text-[0.95rem] transition-all duration-300
+           hover:bg-[#c0182b] hover:-translate-y-0.5 hover:shadow-[0_12px_36px_rgba(231,41,60,0.45)];
   }
 
-  .btn-outline {
-    @apply inline-flex items-center gap-2 border-2 border-brand-gold text-brand-gold
-           font-bold rounded-full px-8 py-4 text-base
-           hover:bg-brand-gold hover:text-brand-dark hover:-translate-y-1
-           transition-all duration-300 font-body;
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 border border-[#05080c]/20 text-[#05080c] font-semibold
+           rounded-full px-7 py-3.5 text-[0.95rem] transition-all duration-300
+           hover:bg-[#05080c] hover:text-white;
   }
 
-  .section-label {
-    @apply text-brand-red text-xs font-bold tracking-[4px] uppercase mb-2;
+  /* Small uppercase section eyebrow */
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-[#e7293c] text-xs font-bold tracking-[3px] uppercase;
   }
 
-  .section-title {
-    @apply font-display text-4xl md:text-5xl font-black leading-tight;
-  }
-
-  .card-hover {
-    @apply hover:-translate-y-2 hover:shadow-[0_20px_60px_rgba(0,0,0,0.5)] transition-all duration-300;
-  }
-
-  .veg-dot {
-    @apply w-3 h-3 rounded-sm border-2 border-green-500 flex items-center justify-center;
-  }
-
-  .nonveg-dot {
-    @apply w-3 h-3 rounded-sm border-2 border-red-500 flex items-center justify-center;
-  }
-
-  .glass-card {
-    @apply bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl;
+  .card {
+    @apply bg-white border border-[#05080c]/[0.08] rounded-3xl;
   }
 }
 
-/* Chilli border pattern */
-.chilli-border {
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 20'%3E%3Cpath d='M20 18 C10 18 5 10 10 5 C15 0 25 0 30 5 C35 10 30 18 20 18Z' fill='%23C0392B'/%3E%3Ccircle cx='20' cy='3' r='2' fill='%23E8A020'/%3E%3C/svg%3E")
-    repeat-x bottom;
-  background-size: 40px 20px;
-  padding-bottom: 20px;
+/* Script accent word inside headings */
+.script {
+  font-family: var(--font-script);
+  font-weight: 400;
+  color: var(--red);
+  font-size: 1.15em;
+  line-height: 1;
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #f5c518, #e8a020, #e74c3c);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+/* Marquee for food strip */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  animation: marquee 40s linear infinite;
 }
 
-/* Animated underline */
-.nav-link {
-  position: relative;
+/* gentle float */
+@keyframes floaty {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
 }
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-.nav-link:hover::after,
-.nav-link.active::after {
-  width: 100%;
+.floaty {
+  animation: floaty 6s ease-in-out infinite;
 }
 
-/* Floating whatsapp */
-.whatsapp-float {
-  animation: float 3s ease-in-out infinite;
+/* ---------------------------------------------------------------
+   CSS-only entrance reveals.
+   These run purely in CSS — no JavaScript needed — and ALWAYS end
+   at opacity:1, so content can never get stuck invisible even if
+   hydration fails. (This replaces the JS-gated Framer reveals.)
+----------------------------------------------------------------- */
+@keyframes revealUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes revealLeft {
+  from { opacity: 0; transform: translateX(28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes revealRight {
+  from { opacity: 0; transform: translateX(-28px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes revealScale {
+  from { opacity: 0; transform: scale(0.94); }
+  to   { opacity: 1; transform: none; }
+}
+
+.reveal { animation: revealUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal--left { animation-name: revealLeft; }
+.reveal--right { animation-name: revealRight; }
+.reveal--scale { animation-name: revealScale; }
+
+/* If a user prefers reduced motion, just show everything — no animation. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal--left, .reveal--right, .reveal--scale,
+  .floaty, .marquee-track { animation: none !important; }
 }

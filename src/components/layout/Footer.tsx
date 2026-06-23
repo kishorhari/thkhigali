@@ -1,114 +1,133 @@
 "use client";
-
+import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const quickLinks = ["Home", "About Us", "Menu", "Franchise", "Contact"];
-const menuHighlights = ["Steamed Momos", "Fried Momos", "Tandoori Momos", "Chowmein", "Manchurian", "Shakes"];
+const PHONE = "+91 95404 94775";
+const EMAIL = "info@tikhigali.com";
+const ADDRESS = "Office No 1205, 12th Floor, Supernova Astralis, Sector 94, Noida, Uttar Pradesh – 201313";
+
+const quickLinks = [
+  { label: "Home", href: "/" },
+  { label: "Menu", href: "/menu" },
+  { label: "About Us", href: "/about" },
+  { label: "Franchise", href: "/#franchise" },
+  { label: "Apply Now", href: "/#apply" },
+];
+
+const menuLinks = ["Steamed Momos", "Tandoori Momos", "Hakka Noodles", "Manchurian", "Burgers", "Shakes"];
+
+function CopyChip({ label, value }: { label: string; value: string }) {
+  const [copied, setCopied] = useState(false);
+  function copy() {
+    navigator.clipboard?.writeText(value).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    });
+  }
+  return (
+    <button
+      onClick={copy}
+      style={{
+        display: "flex", flexDirection: "column", alignItems: "flex-start", gap: "2px",
+        background: "none", border: "none", cursor: "pointer", textAlign: "left", padding: 0, fontFamily: "inherit",
+      }}
+      title="Click to copy"
+    >
+      <span style={{ fontSize: "0.72rem", color: "#8a8a8e", textTransform: "uppercase", letterSpacing: "1px", fontWeight: 600 }}>{label}</span>
+      <span style={{ color: "#05080c", fontWeight: 600, fontSize: "1.02rem", display: "flex", alignItems: "center", gap: "8px" }}>
+        {value}
+        <span style={{ fontSize: "0.72rem", color: copied ? "#e7293c" : "#aaa9ad", fontWeight: 600 }}>{copied ? "Copied!" : "Copy"}</span>
+      </span>
+    </button>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer
-      style={{
-        background: "#050100",
-        borderTop: "1px solid rgba(232,160,32,0.15)",
-      }}
-    >
-      {/* Chilli wave border */}
-      <div
-        style={{
-          height: "24px",
-          background: "linear-gradient(90deg,#C0392B,#E67E22,#C0392B)",
-          position: "relative",
-          overflow: "hidden",
-        }}
-      >
-        <div
-          style={{
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: "12px",
-            background: "#050100",
-            clipPath: "polygon(0 100%, 2% 0, 4% 100%, 6% 0, 8% 100%, 10% 0, 12% 100%, 14% 0, 16% 100%, 18% 0, 20% 100%, 22% 0, 24% 100%, 26% 0, 28% 100%, 30% 0, 32% 100%, 34% 0, 36% 100%, 38% 0, 40% 100%, 42% 0, 44% 100%, 46% 0, 48% 100%, 50% 0, 52% 100%, 54% 0, 56% 100%, 58% 0, 60% 100%, 62% 0, 64% 100%, 66% 0, 68% 100%, 70% 0, 72% 100%, 74% 0, 76% 100%, 78% 0, 80% 100%, 82% 0, 84% 100%, 86% 0, 88% 100%, 90% 0, 92% 100%, 94% 0, 96% 100%, 98% 0, 100% 100%)",
-          }}
-        />
-      </div>
+    <footer id="contact" style={{ background: "#ffffff", borderTop: "1px solid rgba(5,8,12,0.08)" }}>
+      {/* thin red accent */}
+      <div style={{ height: "4px", background: "#e7293c" }} />
 
-      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "60px 5% 32px" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", padding: "64px 5% 36px" }}>
+        {/* Contact band */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "2fr 1fr 1fr 1fr",
-            gap: "3rem",
-            paddingBottom: "40px",
-            borderBottom: "1px solid rgba(255,255,255,0.06)",
+            gridTemplateColumns: "1fr auto",
+            gap: "32px",
+            alignItems: "center",
+            paddingBottom: "44px",
+            borderBottom: "1px solid rgba(5,8,12,0.08)",
           }}
-          className="grid-cols-1 md:grid-cols-4"
+          className="foot-top"
+        >
+          <div>
+            <h3 style={{ fontSize: "clamp(1.6rem,3vw,2.4rem)", fontWeight: 800, color: "#05080c", letterSpacing: "-0.02em", lineHeight: 1.15, marginBottom: "10px" }}>
+              Get in <span className="script">touch</span>
+            </h3>
+            <p style={{ color: "#5b5b5b", fontSize: "0.98rem", lineHeight: 1.6, maxWidth: "440px" }}>
+              Questions about a franchise or just want to say hello? We&apos;d love to hear from you.
+            </p>
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+            <CopyChip label="Phone" value={PHONE} />
+            <CopyChip label="Email" value={EMAIL} />
+          </div>
+        </div>
+
+        {/* Link grid */}
+        <div
+          style={{ display: "grid", gridTemplateColumns: "2fr 1fr 1fr 1.3fr", gap: "40px", padding: "44px 0 36px" }}
+          className="foot-grid"
         >
           {/* Brand */}
           <div>
-            <Image
-              src="/logo.png"
-              alt="Tikhi Gali"
-              width={160}
-              height={60}
-              style={{ height: "56px", width: "auto", objectFit: "contain", marginBottom: "16px" }}
-            />
-            <p style={{ color: "#6a4a2a", fontSize: "0.9rem", lineHeight: 1.7, marginBottom: "20px" }}>
-              Noida&apos;s favourite street-style Indo-Chinese destination. Bold flavours, real spice, genuine smiles.
+            <Image src="/logo.png" alt="Tikhi Gali" width={240} height={160} style={{ height: "78px", width: "auto", objectFit: "contain", marginBottom: "16px" }} />
+            <p style={{ color: "#5b5b5b", fontSize: "0.92rem", lineHeight: 1.65, maxWidth: "300px", marginBottom: "18px" }}>
+              India&apos;s fastest growing momos &amp; Indo-Chinese QSR chain. Bold flavours, proven systems, real margins.
             </p>
-            <div style={{ display: "flex", gap: "10px" }}>
-              {["f", "ig", "yt", "wa"].map((s) => (
-                <a
-                  key={s}
-                  href="#"
-                  style={{
-                    width: "38px",
-                    height: "38px",
-                    borderRadius: "50%",
-                    border: "1px solid rgba(232,160,32,0.25)",
-                    color: "#E8A020",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "0.75rem",
-                    fontWeight: 800,
-                    textDecoration: "none",
-                    transition: "all 0.2s",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "#E8A020";
-                    el.style.color = "#0D0402";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget;
-                    el.style.background = "transparent";
-                    el.style.color = "#E8A020";
-                  }}
-                >
-                  {s.toUpperCase()}
-                </a>
-              ))}
-            </div>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "8px",
+                border: "1px solid rgba(5,8,12,0.15)", borderRadius: "50px", padding: "9px 18px",
+                color: "#05080c", fontSize: "0.85rem", fontWeight: 600, textDecoration: "none", transition: "all 0.2s",
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "#e7293c"; e.currentTarget.style.color = "#e7293c"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(5,8,12,0.15)"; e.currentTarget.style.color = "#05080c"; }}
+            >
+              Instagram ↗
+            </a>
           </div>
 
-          {/* Quick Links */}
+          {/* Quick links */}
           <div>
-            <h5 style={{ fontWeight: 800, fontSize: "0.85rem", color: "#c4a882", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>
-              Quick Links
-            </h5>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
+            <h5 style={{ fontWeight: 700, fontSize: "0.78rem", color: "#8a8a8e", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>Quick Links</h5>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "11px" }}>
               {quickLinks.map((l) => (
+                <li key={l.label}>
+                  <Link href={l.href} style={{ color: "#5b5b5b", fontSize: "0.92rem", textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#e7293c")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#5b5b5b")}>
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Menu highlights */}
+          <div>
+            <h5 style={{ fontWeight: 700, fontSize: "0.78rem", color: "#8a8a8e", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>Our Menu</h5>
+            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "11px" }}>
+              {menuLinks.map((l) => (
                 <li key={l}>
-                  <Link
-                    href={l === "Home" ? "/" : l === "Menu" ? "/menu" : l === "About Us" ? "/about" : `/#${l.toLowerCase()}`}
-                    style={{ color: "#5a3e2a", fontSize: "0.9rem", textDecoration: "none", transition: "color 0.2s" }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#E8A020")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#5a3e2a")}
-                  >
+                  <Link href="/menu" style={{ color: "#5b5b5b", fontSize: "0.92rem", textDecoration: "none", transition: "color 0.2s" }}
+                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#e7293c")}
+                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#5b5b5b")}>
                     {l}
                   </Link>
                 </li>
@@ -116,77 +135,35 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Menu Highlights */}
+          {/* Address */}
           <div>
-            <h5 style={{ fontWeight: 800, fontSize: "0.85rem", color: "#c4a882", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>
-              Our Menu
-            </h5>
-            <ul style={{ listStyle: "none", display: "flex", flexDirection: "column", gap: "10px" }}>
-              {menuHighlights.map((l) => (
-                <li key={l}>
-                  <Link
-                    href="/menu"
-                    style={{ color: "#5a3e2a", fontSize: "0.9rem", textDecoration: "none", transition: "color 0.2s" }}
-                    onMouseEnter={(e) => ((e.target as HTMLElement).style.color = "#E8A020")}
-                    onMouseLeave={(e) => ((e.target as HTMLElement).style.color = "#5a3e2a")}
-                  >
-                    {l}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact */}
-          <div>
-            <h5 style={{ fontWeight: 800, fontSize: "0.85rem", color: "#c4a882", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>
-              Contact
-            </h5>
-            <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
-              {[
-                { icon: "📍", val: "H30, Sector 22, Noida – 201301" },
-                { icon: "📞", val: "+91 9540494775", href: "tel:+919540494775" },
-                { icon: "✉️", val: "info@tikhigali.com", href: "mailto:info@tikhigali.com" },
-                { icon: "🕐", val: "11 AM – 11 PM, Daily" },
-              ].map(({ icon, val, href }) => (
-                <div key={val} style={{ display: "flex", gap: "10px", alignItems: "flex-start" }}>
-                  <span style={{ fontSize: "0.9rem" }}>{icon}</span>
-                  {href ? (
-                    <a href={href} style={{ color: "#5a3e2a", fontSize: "0.85rem", textDecoration: "none" }}>
-                      {val}
-                    </a>
-                  ) : (
-                    <span style={{ color: "#5a3e2a", fontSize: "0.85rem" }}>{val}</span>
-                  )}
-                </div>
-              ))}
-            </div>
+            <h5 style={{ fontWeight: 700, fontSize: "0.78rem", color: "#8a8a8e", letterSpacing: "1px", textTransform: "uppercase", marginBottom: "16px" }}>Visit / Corporate Office</h5>
+            <p style={{ color: "#5b5b5b", fontSize: "0.92rem", lineHeight: 1.7 }}>{ADDRESS}</p>
+            <p style={{ color: "#5b5b5b", fontSize: "0.92rem", marginTop: "10px" }}>Open daily · 11:00 AM – 11:00 PM</p>
           </div>
         </div>
 
         {/* Bottom bar */}
         <div
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            marginTop: "24px",
-            flexWrap: "wrap",
-            gap: "12px",
+            display: "flex", justifyContent: "space-between", alignItems: "center",
+            paddingTop: "24px", borderTop: "1px solid rgba(5,8,12,0.06)", flexWrap: "wrap", gap: "12px",
           }}
         >
-          <span style={{ color: "#3a2010", fontSize: "0.82rem" }}>
-            © 2026 Tikhi Gali. All rights reserved. | Street Style Chinese, Desi Spice.
-          </span>
-          <div style={{ display: "flex", gap: "16px" }}>
-            {["Privacy Policy", "Terms of Service"].map((t) => (
-              <a key={t} href="#" style={{ color: "#3a2010", fontSize: "0.82rem", textDecoration: "none" }}>
-                {t}
-              </a>
-            ))}
-          </div>
+          <span style={{ color: "#8a8a8e", fontSize: "0.82rem" }}>© 2026 Tikhi Gali. All rights reserved.</span>
+          <Link href="#" style={{ color: "#8a8a8e", fontSize: "0.82rem", textDecoration: "none" }}>Privacy Policy</Link>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 760px) {
+          .foot-top { grid-template-columns: 1fr !important; gap: 24px !important; }
+          .foot-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+        }
+        @media (max-width: 460px) {
+          .foot-grid { grid-template-columns: 1fr !important; }
+        }
+      `}</style>
     </footer>
   );
 }

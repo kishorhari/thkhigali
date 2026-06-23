@@ -1,27 +1,19 @@
-"use client";
-import { motion, type Variants } from "framer-motion";
-import type { ReactNode, CSSProperties } from "react";
+import type { ReactNode, CSSProperties, ElementType } from "react";
 
 type Direction = "up" | "down" | "left" | "right" | "none";
 
-const offset: Record<Direction, { x: number; y: number }> = {
-  up: { x: 0, y: 40 },
-  down: { x: 0, y: -40 },
-  left: { x: 40, y: 0 },
-  right: { x: -40, y: 0 },
-  none: { x: 0, y: 0 },
-};
-
 /**
- * Scroll-reveal wrapper. Fades + slides children into view the first time
- * they enter the viewport. Optional stagger delay for sequenced reveals.
+ * CSS-only entrance reveal. Renders content that fades/slides in via a pure
+ * CSS animation (see globals.css). It needs NO JavaScript and always settles
+ * at opacity:1 — so content can never get stuck invisible if hydration fails.
  */
 export default function Reveal({
   children,
   direction = "up",
   delay = 0,
-  duration = 0.6,
-  className,
+  duration = 0.7,
+  scale = false,
+  className = "",
   style,
   as = "div",
 }: {
@@ -29,34 +21,27 @@ export default function Reveal({
   direction?: Direction;
   delay?: number;
   duration?: number;
+  scale?: boolean;
   className?: string;
   style?: CSSProperties;
-  as?: "div" | "section" | "li" | "span";
+  as?: ElementType;
 }) {
-  const { x, y } = offset[direction];
+  const variant = scale
+    ? "reveal--scale"
+    : direction === "left"
+    ? "reveal--left"
+    : direction === "right"
+    ? "reveal--right"
+    : "";
 
-  const variants: Variants = {
-    hidden: { opacity: 0, x, y },
-    visible: {
-      opacity: 1,
-      x: 0,
-      y: 0,
-      transition: { duration, delay, ease: [0.22, 1, 0.36, 1] },
-    },
-  };
-
-  const MotionTag = motion[as] as typeof motion.div;
+  const Tag = as as ElementType;
 
   return (
-    <MotionTag
-      className={className}
-      style={style}
-      variants={variants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.2 }}
+    <Tag
+      className={`reveal ${variant} ${className}`.trim()}
+      style={{ animationDelay: `${delay}s`, animationDuration: `${duration}s`, ...style }}
     >
       {children}
-    </MotionTag>
+    </Tag>
   );
 }

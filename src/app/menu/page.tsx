@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
-import { menuData, type MenuItem } from "@/data/menu";
+import Image from "next/image";
+import { menuData, itemImage, type MenuItem } from "@/data/menu";
 
 const categories = [
   { id: "momos", label: "🥟 Momos" },
@@ -27,7 +28,7 @@ export default function MenuPage() {
       {/* Hero Banner */}
       <div
         style={{
-          background: "linear-gradient(135deg, #0D0402 0%, #2A0A02 50%, #0D0402 100%)",
+          background: "linear-gradient(135deg, #ffffff 0%, #f5f5f5 50%, #ffffff 100%)",
           paddingTop: "120px",
           paddingBottom: "60px",
           textAlign: "center",
@@ -45,24 +46,24 @@ export default function MenuPage() {
           }}
         />
         <div style={{ position: "relative", zIndex: 1 }}>
-          <div style={{ color: "#C0392B", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "4px", textTransform: "uppercase", marginBottom: "0.5rem" }}>
+          <div style={{ color: "#e7293c", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "4px", textTransform: "uppercase", marginBottom: "0.5rem" }}>
             What We Serve
           </div>
           <h1
             style={{
-              fontFamily: "'Playfair Display', serif",
+              fontFamily: "'Inter', sans-serif",
               fontSize: "clamp(2.5rem,5vw,4.5rem)",
               fontWeight: 900,
-              color: "#fff",
+              color: "#05080c",
               marginBottom: "1rem",
             }}
           >
             Our{" "}
-            <span style={{ background: "linear-gradient(135deg,#F5C518,#E8A020,#E74C3C)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
+            <span style={{ background: "linear-gradient(135deg,#e7293c,#e7293c,#e7293c)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
               Full Menu
             </span>
           </h1>
-          <p style={{ color: "#8a6040", fontSize: "1rem", maxWidth: "500px", margin: "0 auto 2rem" }}>
+          <p style={{ color: "#5b5b5b", fontSize: "1rem", maxWidth: "500px", margin: "0 auto 2rem" }}>
             100+ dishes crafted with bold Indo-Chinese flavours, zero MSG, zero palm oil.
           </p>
 
@@ -76,12 +77,12 @@ export default function MenuPage() {
               onChange={(e) => setSearch(e.target.value)}
               style={{
                 width: "100%",
-                background: "rgba(255,255,255,0.07)",
-                border: "1px solid rgba(255,255,255,0.15)",
+                background: "rgba(5,8,12,0.07)",
+                border: "1px solid rgba(5,8,12,0.16)",
                 borderRadius: "50px",
                 padding: "14px 20px 14px 44px",
-                color: "#fff",
-                fontFamily: "'Baloo 2',sans-serif",
+                color: "#05080c",
+                fontFamily: "'Inter', sans-serif",
                 fontSize: "0.95rem",
                 outline: "none",
               }}
@@ -94,11 +95,11 @@ export default function MenuPage() {
       <div
         style={{
           position: "sticky",
-          top: "72px",
+          top: "76px",
           zIndex: 100,
-          background: "rgba(13,4,2,0.97)",
+          background: "rgba(255,255,255,0.92)",
           backdropFilter: "blur(20px)",
-          borderBottom: "1px solid rgba(232,160,32,0.15)",
+          borderBottom: "1px solid rgba(5,8,12,0.08)",
           overflowX: "auto",
         }}
       >
@@ -111,12 +112,12 @@ export default function MenuPage() {
                 padding: "18px 24px",
                 border: "none",
                 background: "none",
-                color: activeCategory === cat.id ? "#F5C518" : "#7a5030",
-                fontFamily: "'Baloo 2',sans-serif",
+                color: activeCategory === cat.id ? "#e7293c" : "#5b5b5b",
+                fontFamily: "'Inter', sans-serif",
                 fontWeight: 700,
                 fontSize: "0.9rem",
                 cursor: "pointer",
-                borderBottom: `3px solid ${activeCategory === cat.id ? "#E8A020" : "transparent"}`,
+                borderBottom: `3px solid ${activeCategory === cat.id ? "#e7293c" : "transparent"}`,
                 transition: "all 0.2s",
                 whiteSpace: "nowrap",
               }}
@@ -130,13 +131,13 @@ export default function MenuPage() {
       {/* Veg/NonVeg filter */}
       <div
         style={{
-          background: "#0D0402",
+          background: "#ffffff",
           padding: "24px 5%",
-          borderBottom: "1px solid rgba(255,255,255,0.04)",
+          borderBottom: "1px solid #05080c",
         }}
       >
         <div style={{ maxWidth: "1200px", margin: "0 auto", display: "flex", gap: "12px", alignItems: "center", flexWrap: "wrap" }}>
-          <span style={{ color: "#6a4a2a", fontSize: "0.85rem", fontWeight: 700 }}>Filter:</span>
+          <span style={{ color: "#5b5b5b", fontSize: "0.85rem", fontWeight: 700 }}>Filter:</span>
           {(["all", "veg", "nonveg"] as FilterType[]).map((f) => (
             <button
               key={f}
@@ -144,10 +145,10 @@ export default function MenuPage() {
               style={{
                 padding: "7px 20px",
                 borderRadius: "50px",
-                border: `1px solid ${filter === f ? (f === "veg" ? "#27AE60" : f === "nonveg" ? "#C0392B" : "#E8A020") : "rgba(255,255,255,0.12)"}`,
+                border: `1px solid ${filter === f ? (f === "veg" ? "#27AE60" : f === "nonveg" ? "#e7293c" : "#e7293c") : "rgba(5,8,12,0.14)"}`,
                 background: filter === f ? (f === "veg" ? "rgba(39,174,96,0.15)" : f === "nonveg" ? "rgba(192,57,43,0.15)" : "rgba(232,160,32,0.15)") : "transparent",
-                color: filter === f ? (f === "veg" ? "#27AE60" : f === "nonveg" ? "#E74C3C" : "#E8A020") : "#7a5030",
-                fontFamily: "'Baloo 2',sans-serif",
+                color: filter === f ? (f === "veg" ? "#27AE60" : f === "nonveg" ? "#e7293c" : "#e7293c") : "#5b5b5b",
+                fontFamily: "'Inter', sans-serif",
                 fontWeight: 700,
                 fontSize: "0.82rem",
                 cursor: "pointer",
@@ -158,7 +159,7 @@ export default function MenuPage() {
               }}
             >
               {f === "veg" && <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#27AE60", display: "inline-block" }} />}
-              {f === "nonveg" && <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#C0392B", display: "inline-block" }} />}
+              {f === "nonveg" && <span style={{ width: "10px", height: "10px", borderRadius: "50%", background: "#e7293c", display: "inline-block" }} />}
               {f === "all" ? "All Items" : f === "veg" ? "Veg Only" : "Non-Veg Only"}
             </button>
           ))}
@@ -166,7 +167,7 @@ export default function MenuPage() {
       </div>
 
       {/* Menu content */}
-      <div style={{ background: "#0D0402", minHeight: "60vh", padding: "48px 5% 80px" }}>
+      <div style={{ background: "#ffffff", minHeight: "60vh", padding: "48px 5% 80px" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
           {catData.subcategories.map((sub) => {
             const items = sub.items.filter((item: MenuItem) => {
@@ -186,7 +187,7 @@ export default function MenuPage() {
                     gap: "16px",
                     marginBottom: "24px",
                     paddingBottom: "16px",
-                    borderBottom: "1px solid rgba(255,255,255,0.06)",
+                    borderBottom: "1px solid #f5f5f5",
                   }}
                 >
                   <div
@@ -199,10 +200,10 @@ export default function MenuPage() {
                   />
                   <h3
                     style={{
-                      fontFamily: "'Playfair Display',serif",
+                      fontFamily: "'Inter', sans-serif",
                       fontSize: "1.5rem",
                       fontWeight: 900,
-                      color: "#fff",
+                      color: "#05080c",
                     }}
                   >
                     {sub.label}
@@ -234,8 +235,8 @@ export default function MenuPage() {
                     <div
                       key={item.name}
                       style={{
-                        background: "rgba(255,255,255,0.04)",
-                        border: "1px solid rgba(255,255,255,0.07)",
+                        background: "#ffffff",
+                        border: "1px solid rgba(5,8,12,0.08)",
                         borderRadius: "16px",
                         padding: "18px 20px",
                         display: "flex",
@@ -246,22 +247,42 @@ export default function MenuPage() {
                       }}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.borderColor = `${sub.color}55`;
-                        e.currentTarget.style.background = "rgba(255,255,255,0.06)";
+                        e.currentTarget.style.background = "#f5f5f5";
                         e.currentTarget.style.transform = "translateX(4px)";
                       }}
                       onMouseLeave={(e) => {
-                        e.currentTarget.style.borderColor = "rgba(255,255,255,0.07)";
-                        e.currentTarget.style.background = "rgba(255,255,255,0.04)";
+                        e.currentTarget.style.borderColor = "rgba(5,8,12,0.08)";
+                        e.currentTarget.style.background = "#ffffff";
                         e.currentTarget.style.transform = "translateX(0)";
                       }}
                     >
-                      <div style={{ display: "flex", gap: "12px", alignItems: "center", flex: 1 }}>
+                      <div style={{ display: "flex", gap: "14px", alignItems: "center", flex: 1 }}>
+                        {/* Dish thumbnail */}
+                        <div
+                          style={{
+                            position: "relative",
+                            width: "60px",
+                            height: "60px",
+                            borderRadius: "12px",
+                            overflow: "hidden",
+                            flexShrink: 0,
+                            border: "1px solid rgba(5,8,12,0.08)",
+                          }}
+                        >
+                          <Image
+                            src={itemImage(item.name, sub.id)}
+                            alt={item.name}
+                            fill
+                            sizes="60px"
+                            style={{ objectFit: "cover" }}
+                          />
+                        </div>
                         {/* Veg/NonVeg indicator */}
                         <div
                           style={{
                             width: "18px",
                             height: "18px",
-                            border: `2px solid ${item.veg ? "#27AE60" : "#C0392B"}`,
+                            border: `2px solid ${item.veg ? "#27AE60" : "#e7293c"}`,
                             borderRadius: "4px",
                             flexShrink: 0,
                             display: "flex",
@@ -274,17 +295,17 @@ export default function MenuPage() {
                               width: "8px",
                               height: "8px",
                               borderRadius: "50%",
-                              background: item.veg ? "#27AE60" : "#C0392B",
+                              background: item.veg ? "#27AE60" : "#e7293c",
                             }}
                           />
                         </div>
                         <div>
-                          <div style={{ fontWeight: 700, color: "#e0c8a8", fontSize: "0.92rem", lineHeight: 1.3 }}>{item.name}</div>
+                          <div style={{ fontWeight: 700, color: "#484848", fontSize: "0.92rem", lineHeight: 1.3 }}>{item.name}</div>
                           {"qty" in item && item.qty && (
-                            <div style={{ fontSize: "0.72rem", color: "#6a4a2a", marginTop: "2px" }}>{item.qty as string}</div>
+                            <div style={{ fontSize: "0.72rem", color: "#5b5b5b", marginTop: "2px" }}>{item.qty as string}</div>
                           )}
                           {"badge" in item && item.badge && (
-                            <span style={{ fontSize: "0.65rem", background: "#C0392B", color: "#fff", padding: "2px 8px", borderRadius: "10px", fontWeight: 700, marginTop: "4px", display: "inline-block" }}>
+                            <span style={{ fontSize: "0.65rem", background: "#e7293c", color: "#fff", padding: "2px 8px", borderRadius: "10px", fontWeight: 700, marginTop: "4px", display: "inline-block" }}>
                               {item.badge as string}
                             </span>
                           )}
@@ -292,10 +313,10 @@ export default function MenuPage() {
                       </div>
                       <div
                         style={{
-                          fontFamily: "'Playfair Display',serif",
+                          fontFamily: "'Inter', sans-serif",
                           fontSize: "1.15rem",
                           fontWeight: 900,
-                          color: "#F5C518",
+                          color: "#e7293c",
                           flexShrink: 0,
                         }}
                       >

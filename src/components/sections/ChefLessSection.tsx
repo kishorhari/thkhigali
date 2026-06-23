@@ -1,94 +1,107 @@
 "use client";
+import Image from "next/image";
 import { chefLessModel } from "@/data/franchise";
 import Reveal from "@/components/ui/Reveal";
 
 export default function ChefLessSection() {
   return (
-    <section
-      style={{
-        background: "#0D0402",
-        padding: "100px 5%",
-        position: "relative",
-        overflow: "hidden",
-      }}
-    >
-      <div
-        style={{
-          position: "absolute",
-          top: 0,
-          left: "50%",
-          transform: "translateX(-50%)",
-          width: "800px",
-          height: "2px",
-          background: "linear-gradient(90deg, transparent, rgba(232,160,32,0.4), transparent)",
-        }}
-      />
-
-      <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-        <Reveal style={{ textAlign: "center", marginBottom: "4rem" }}>
-          <div style={{ color: "#C0392B", fontSize: "0.78rem", fontWeight: 700, letterSpacing: "4px", textTransform: "uppercase", marginBottom: "0.5rem" }}>
-            Why It Works
-          </div>
+    <section style={{ background: "#f5f5f5", padding: "110px 5%", position: "relative", overflow: "hidden" }}>
+      <div style={{ maxWidth: "1200px", margin: "0 auto", position: "relative", zIndex: 1 }}>
+        <Reveal style={{ maxWidth: "820px", marginBottom: "3.5rem" }}>
+          <div className="eyebrow" style={{ marginBottom: "1.2rem" }}>Chef-less Model</div>
           <h2
             style={{
-              fontFamily: "'Playfair Display', serif",
-              fontSize: "clamp(2rem,4vw,3.2rem)",
-              fontWeight: 900,
-              color: "#fff",
-              marginBottom: "1rem",
+              fontSize: "clamp(1.9rem, 4vw, 3rem)",
+              fontWeight: 800,
+              lineHeight: 1.12,
+              letterSpacing: "-0.02em",
+              color: "#05080c",
             }}
           >
-            The{" "}
-            <span style={{ background: "linear-gradient(135deg,#F5C518,#E8A020)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-              Chef-Less
-            </span>{" "}
-            Model
+            No chef needed. Just a smart, system-driven kitchen that works{" "}
+            <span className="script">seamlessly</span> every time.
           </h2>
-          <p style={{ color: "#6a4a2a", fontSize: "1rem", maxWidth: "560px", margin: "0 auto", lineHeight: 1.7 }}>
-            Our biggest advantage — consistent, high-quality food without depending on a skilled chef at every outlet.
-          </p>
         </Reveal>
 
+        {/* Large 2-column image cards */}
         <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "24px",
-          }}
+          style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px" }}
+          className="model-cards"
         >
           {chefLessModel.map((c, i) => (
-            <Reveal key={c.title} delay={i * 0.1}>
+            <Reveal key={c.title} delay={(i % 2) * 0.1} scale>
               <div
                 style={{
-                  background: "rgba(255,255,255,0.03)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                  borderRadius: "20px",
-                  padding: "32px 26px",
+                  background: "#ffffff",
+                  border: "1px solid rgba(5,8,12,0.07)",
+                  borderRadius: "26px",
+                  overflow: "hidden",
                   height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  boxShadow: "0 2px 10px rgba(5,8,12,0.04)",
                   transition: "all 0.3s",
-                  borderTop: "3px solid #C0392B",
                 }}
                 onMouseEnter={(e) => {
                   const el = e.currentTarget;
                   el.style.transform = "translateY(-6px)";
-                  el.style.background = "rgba(255,255,255,0.06)";
-                  el.style.boxShadow = "0 20px 50px rgba(0,0,0,0.5)";
+                  el.style.boxShadow = "0 24px 60px rgba(5,8,12,0.12)";
+                  const img = el.querySelector("img");
+                  if (img) (img as HTMLElement).style.transform = "scale(1.05)";
                 }}
                 onMouseLeave={(e) => {
                   const el = e.currentTarget;
                   el.style.transform = "translateY(0)";
-                  el.style.background = "rgba(255,255,255,0.03)";
-                  el.style.boxShadow = "none";
+                  el.style.boxShadow = "0 2px 10px rgba(5,8,12,0.04)";
+                  const img = el.querySelector("img");
+                  if (img) (img as HTMLElement).style.transform = "scale(1)";
                 }}
               >
-                <span style={{ fontSize: "2.6rem", display: "block", marginBottom: "16px" }}>{c.icon}</span>
-                <h4 style={{ fontWeight: 800, fontSize: "1.1rem", color: "#fff", marginBottom: "10px" }}>{c.title}</h4>
-                <p style={{ fontSize: "0.88rem", color: "#8a6040", lineHeight: 1.65 }}>{c.desc}</p>
+                {/* Text top */}
+                <div style={{ padding: "34px 34px 22px" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "12px" }}>
+                    <div
+                      style={{
+                        width: "44px",
+                        height: "44px",
+                        borderRadius: "12px",
+                        background: "rgba(231,41,60,0.1)",
+                        border: "1px solid rgba(231,41,60,0.25)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        fontSize: "1.3rem",
+                        flexShrink: 0,
+                      }}
+                    >
+                      {c.icon}
+                    </div>
+                    <h3 style={{ fontWeight: 800, fontSize: "clamp(1.2rem,2vw,1.6rem)", color: "#e7293c", lineHeight: 1.15 }}>
+                      {c.title}
+                    </h3>
+                  </div>
+                  <p style={{ fontSize: "1rem", color: "#5b5b5b", lineHeight: 1.6, maxWidth: "440px" }}>{c.desc}</p>
+                </div>
+
+                {/* Image fills bottom */}
+                <div style={{ position: "relative", flex: 1, minHeight: "260px", margin: "0 16px 16px", borderRadius: "18px", overflow: "hidden" }}>
+                  <Image
+                    src={c.image}
+                    alt={c.title}
+                    fill
+                    sizes="(max-width: 820px) 90vw, 45vw"
+                    style={{ objectFit: "cover", transition: "transform 0.5s ease" }}
+                  />
+                </div>
               </div>
             </Reveal>
           ))}
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 820px) { .model-cards { grid-template-columns: 1fr !important; } }
+      `}</style>
     </section>
   );
 }
